@@ -9,7 +9,7 @@ import {map} from 'rxjs/operators';
 })
 export class ProductService {
 
-  private baseUrl ="http://localhost:4200/api/products";
+  private baseUrl ="http://localhost:8080/api/products";
   constructor(private httpClient: HttpClient) { }
 
   // return an Observable { map the json data from spring Data REST to product array}
