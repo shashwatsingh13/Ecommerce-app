@@ -9,18 +9,21 @@ import {map} from 'rxjs/operators';
 })
 export class ProductService {
 
-  private baseUrl ="http://localhost:8080/api/products?size=100";
+  private baseUrl ="http://localhost:8080/api/products";
   constructor(private httpClient: HttpClient) { }
 
   // return an Observable { map the json data from spring Data REST to product array}
-  getProductList(): Observable<Product[]> {
-    return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
+  getProductList(theCategoryId?: number): Observable<Product[]> {
+       // need to build URL based on category id 
+       const searchUrl =`${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
+
+    return this.httpClient.get<GetResponse>(searchUrl).pipe(
       map(response =>response._embedded.products)
     );
   }
 }
 
-// unwrap the jason from spring data REST _embedded entry
+// unwrap the json from spring data REST _embedded entry
 interface GetResponse{
   _embedded:{
     products: Product[];
