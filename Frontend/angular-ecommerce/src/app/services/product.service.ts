@@ -27,6 +27,13 @@ export class ProductService {
     );
   }
 
+  getProduct(theProductId: number): Observable<Product> {
+    // need to build url based on product id
+    const productUrl = `${this.baseUrl}/${theProductId}`;
+
+    return this.httpClient.get<Product>(productUrl);
+  }
+
   getProductCategories(): Observable<ProductCategory[]> {
     
     // call rest API and returns an observable 
