@@ -50,7 +50,7 @@ public class Order {
     @CreationTimestamp              // hybernate fuctionality
     private Date dateCreated;
 
-    @Column(name = "lat_updated")
+    @Column(name = "last_updated")
     @UpdateTimestamp
     private Date lastUpdated;
 
@@ -66,7 +66,9 @@ public class Order {
     private Address ShippingAddress;
 
     //private Address billingAddress;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
+    private Address billingAddress;
 
     public void add(OrderItem item){
 

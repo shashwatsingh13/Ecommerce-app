@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,11 +30,16 @@ public class Address {
 
     @Column(name="state")
     private String state;
+    
     @Column(name="country")
     private String country;
 
     @Column(name = "zip_code")
     private String zipCode;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn                  // Join Column Primary Key by default keys have same name
+    private Order order;
     
     
 }

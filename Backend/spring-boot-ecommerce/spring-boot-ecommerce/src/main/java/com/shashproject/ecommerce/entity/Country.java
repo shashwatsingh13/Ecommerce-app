@@ -31,8 +31,8 @@ public class Country {
     @Column(name = "name")
     private String name;
     
-    // todo set up one-to-many with states (one country has many states)
+    //  set up one-to-many with states (one country has many states)
     @OneToMany(mappedBy = "country")
-    @JsonIgnore                           // this is will ignore until data don't comes up
+    @JsonIgnore                           // this is will ignore until data don't come
     private List<State> states;
 }
