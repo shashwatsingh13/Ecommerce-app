@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../common/cart-item';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +8,8 @@ import { Subject } from 'rxjs';
 export class CartService {
   cartItems: CartItem[]=[];
 
-  totalPrice: Subject<number> = new Subject<number>();
-  totalQuantitiy: Subject<number> = new Subject<number>();
+  totalPrice: Subject<number> = new BehaviorSubject<number>(0);
+  totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
   constructor() { }
 
@@ -50,20 +50,20 @@ export class CartService {
   computeCartTotals() {
     
     let totalPriceValue = 0;
-    let totalQuantitiyValue = 0;
+    let totalQuantityValue = 0;
 
     for(let currentCartItem of this.cartItems){
       totalPriceValue += currentCartItem.quanitity * currentCartItem.unitPrice;
-      totalQuantitiyValue += currentCartItem.quanitity;
+      totalQuantityValue += currentCartItem.quanitity;
     }
 
     // publish the new values ..... all subscribers will recieve the new data
     // .next is used to publish/send the event
     this.totalPrice.next(totalPriceValue);
-    this.totalQuantitiy.next(totalQuantitiyValue);
+    this.totalQuantity.next(totalQuantityValue);
 
     // log cart data for debuggung purpose
-    this.logCartData(totalPriceValue, totalQuantitiyValue);
+    this.logCartData(totalPriceValue, totalQuantityValue);
   }
 
   logCartData(totalPriceValue: number, totalQuantitiyValue: number){

@@ -24,7 +24,7 @@ export class CartStatusComponent implements OnInit {
     );
 
     // subascribe to the cart totalQuantity
-    this.cartService.totalQuantitiy.subscribe(
+    this.cartService.totalQuantity.subscribe(
       data => this.totalQuantity = data
     );
   }
